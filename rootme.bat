@@ -20,34 +20,17 @@ echo or have at least 30% battery.
 
 pause
 
-cd roottool
+echo.
+echo.
+echo At this time, a screen will pop up on your device
+echo asking for a restore. Press it. A whole bunch of
+echo errors will appear on your comupter. Those are
+echo also normal. Don't panic.
+pause
+
+
 adb wait-for-device
-echo Setting up simlinks
-adb shell "mv /data/gps/gldata.sto /data/gps/gldata.sto.bak"
-adb shell "ln -s /data/local.prop /data/gps/gldata.sto"
-echo Fire up Google maps. Wait for the GPS icon to have
-echo full lock before continuing. Then hit the Home button,
-echo then the Recent Apps icon, and swipe out Maps.
-echo.
-echo GPS lock is required for it to work. IF you cannot 
-echo get a lock, this will not work, but you are safe
-echo to close out or ctrl-C this script.
-echo.
-echo At this time, the script cannot check if the file got
-echo into place, so let the script run fully before trying
-echo to exit out if it didn't work.
-echo.
-echo At this time, you may experience several reboots and
-echo the lock screen and boot animation switching. This
-echo is normal; do not disconnect or turn off your Thrive.
-pause 
-echo.
-echo Setting up local.prop...
-adb shell "mv /data/gps/gldata.sto.bak /data/gps/gldata.sto"
-adb shell "echo "ro.kernel.qemu=1" > /data/local.prop"
-adb shell "echo "ro.sys.atvc_allow_all_adb=1" >> /data/local.prop"
-echo.
-echo Rebooting to enable local.prop changes....
+adb shell "while ! ln -s /data/local.prop /data/data/com.android.settings/a/file99; do :; done"
 adb reboot
 
 echo.
