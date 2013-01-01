@@ -28,7 +28,7 @@ echo errors will appear on your comupter. Those are
 echo also normal. Don't panic.
 pause
 
-
+cd roottool
 adb wait-for-device
 adb shell "while ! ln -s /data/local.prop /data/data/com.android.settings/a/file99; do :; done"
 adb reboot
