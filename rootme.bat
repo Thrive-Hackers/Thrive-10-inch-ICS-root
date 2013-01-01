@@ -40,17 +40,15 @@ adb shell "mkdir /data/x-root"
 adb shell "mkdir /data/x-root/bin"
 adb push busybox /data/x-root/bin/busybox
 adb push su /data/x-root/bin/su
-adb shell "cd /data/x-root/bin"
 echo.
 echo Setting up BusyBox and SU....
-adb shell "chmod 755 busybox"
-adb shell "PATH="${PATH}:/data/x-root/bin"; export PATH"
+adb shell "chmod 755 /data/x-root/bin/busybox"
 echo.
 echo Mounting /System via loopback....
-adb shell "./busybox mknod /dev/loop0 b 7 0"
-adb shell "./busybox losetup -o 20971520 /dev/loop0 /dev/block/mmcblk0"
+adb shell "/data/x-root/bin/busybox mknod /dev/loop0 b 7 0"
+adb shell "/data/x-root/bin/busybox losetup -o 20971520 /dev/loop0 /dev/block/mmcblk0"
 adb shell "mkdir /dev/tmpdir"
-adb shell "./busybox mount -t ext4 /dev/loop0 /dev/tmpdir"
+adb shell "/data/x-root/bin/busybox mount -t ext4 /dev/loop0 /dev/tmpdir"
 echo.
 echo Pushing su binary into system....
 adb shell "./busybox cp /data/x-root/bin/su /dev/tmpdir/bin/"
