@@ -3,8 +3,7 @@
 function pause(){
    read -p "Press [Enter] to continue"
 }
-UNAME=`uname`
-$UNAME/
+export UNAME=`uname`
 echo Welcome to the opportunity to free your Thrive!
 echo Originally developed by TYBAR at the Thrive forums,
 echo this tool pushes several files onto your device,
@@ -35,6 +34,23 @@ $UNAME/adb restore fakebackup.ab
 $UNAME/adb shell "while ! ln -s /data/local.prop /data/data/com.android.settings/a/file99; do :; done"
 $UNAME/adb reboot
 
+echo Pushing unlocked bootloader....
+$UNAME/adb push blob /mnt/sdcard/blob
+
+echo Pushing CWM...
+adb push recovery.img /mnt/sdcard/recovery.img
+
+echo Flashing unlocked bootloader....
+$UNAME/adb shell dd if=/mnt/sdcard/blob of=/dev/block/mmcblk0p6
+echo Flashing rootable boot image...
+$UNAME/adb shell dd if=/mnt/sdcard/boot.img of=/dev/block/mmcblk0p2
+echo Flashing CWM....
+$UNAME/adb shell dd if=/mnt/sdcard/recovery.img of=/dev/block/mmcblk0p1
+
+echo Rebooting to take effect...
+adb reboot
+$UNAME/adb wait-for-device
+
 echo Pushing files....
 $UNAME/adb wait-for-device 
 $UNAME/adb shell "mkdir /data/x-root"
@@ -45,11 +61,8 @@ $UNAME/adb push su /data/x-root/bin/su
 echo Setting up BusyBox and SU....
 adb shell "chmod 755 /data/x-root/bin/busybox"
 
-echo Mounting /System via loopback....
-$UNAME/adb shell "/data/x-root/bin/busybox mknod /dev/loop0 b 7 0"
-$UNAME/adb shell "/data/x-root/bin/busybox losetup -o 20971520 /dev/loop0 /dev/block/mmcblk0"
-$UNAME/adb shell "mkdir /dev/tmpdir"
-$UNAME/adb shell "/data/x-root/bin/busybox mount -t ext4 /dev/loop0 /dev/tmpdir"
+echo Mounting /System
+$UNAME/adb remount
 
 echo Pushing su binary into system....
 $UNAME/adb shell "./busybox cp /data/x-root/bin/su /dev/tmpdir/bin/"
@@ -74,27 +87,7 @@ echo and tablet don\'t power off. What we are doing, if
 echo interrupted, could fry your tablet permanently.
 pause()
 
-echo Pushing unlocked bootloader....
-$UNAME/adb push blob /mnt/sdcard0/blob
-
-echo Pushing CWM...
-adb push recovery.img /mnt/sdcard0/recovery.img
-
-echo At this time, we are about to push the unlocked 
-echo bootloader. It is imperative that you have a working
-echo Superuser install. Otherwise, this will not work.
-pause()
-$UNAME/adb root
-
-echo Flashing unlocked bootloader....
-$UNAME/adb shell dd if=/mnt/sdcard0/blob of=/dev/block/mmcblk0p6
-echo Flashing CWM....
-$UNAME/adb shell dd if=/mnt/sdcard0/recovery.img of=/dev/block/mmcblk0p1
-
-echo Let's check that recovery did flash and that the new bootloader
-echo isn't giving us the finger running it
 $UNAME/adb reboot
-echo To get to recovery, Hold Volume + and select recovery 
 
 echo Grats, should now be running a fully open system.
 echo Flash away!
