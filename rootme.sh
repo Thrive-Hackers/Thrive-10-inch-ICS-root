@@ -34,6 +34,7 @@ $UNAME/adb restore fakebackup.ab
 $UNAME/adb shell "while ! ln -s /data/local.prop /data/data/com.android.settings/a/file99; do :; done"
 $UNAME/adb reboot
 
+$UNAME/adb wait-for-device
 echo Pushing unlocked bootloader....
 $UNAME/adb push blob /mnt/sdcard/blob
 
