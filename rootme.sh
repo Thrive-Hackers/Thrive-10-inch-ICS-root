@@ -1,5 +1,10 @@
 #!/bin/bash
 
+echo DO NOT USE! DO NOT EDIT!
+echo THIS ***WILL*** BRICK YOUR DEVICE!
+exit
+
+
 function pause(){
    read -p "Press [Enter] to continue"
 }
