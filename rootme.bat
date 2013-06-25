@@ -1,5 +1,9 @@
 @echo off
 
+echo DO NOT USE! DO NOT EDIT!
+echo THIS ***WILL*** BRICK YOUR DEVICE!
+exit
+
 echo Welcome to the opportunity to free your Thrive!
 echo.
 echo Originally developed by TYBAR at the Thrive forums,
