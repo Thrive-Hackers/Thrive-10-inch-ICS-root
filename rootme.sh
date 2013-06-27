@@ -1,16 +1,12 @@
 #!/bin/bash
 
-echo DO NOT USE! DO NOT EDIT!
-echo THIS ***WILL*** BRICK YOUR DEVICE!
-exit
-
-
 function pause(){
    read -p "Press [Enter] to continue"
 }
 export UNAME=`uname`
 echo Welcome to the opportunity to free your Thrive!
 echo Originally developed by TYBAR at the Thrive forums,
+echo and finalized by AmEv and pio_masaki,
 echo this tool pushes several files onto your device,
 echo then flashes the unlocked bootloader, then
 echo installs the SU binary and Superuser app.
