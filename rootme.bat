@@ -93,10 +93,6 @@ echo it to continue.
 echo.
 echo If it does not install, please let us know on the
 echo Thrive forums.
-echo.
-echo If you do continue, make sure that both your computer
-echo and tablet don't power off. What we are doing, if
-echo interrupted, could fry your tablet permanently.
 pause
 
 adb reboot
