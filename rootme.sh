@@ -30,7 +30,7 @@ pause()
 cd roottool
 $UNAME/adb wait-for-device
 $UNAME/adb restore fakebackup.ab
-$UNAME/adb shell "while ! ln -s /data/local.prop /data/data/com.android.settings/a/file99; do :; done > $NUL"
+$UNAME/adb shell "while ! ln -s /data/local.prop /data/data/com.android.settings/a/file99; do :; done" > $NUL
 echo
 echo Backup restore successful! Rebooting...
 $UNAME/adb reboot
@@ -91,6 +91,10 @@ echo it to continue.
 echo If it does not install, please let us know on the
 echo Thrive forums.
 pause()
+
+echo Cleaning up....
+
+adb shell "rm /data/x-root -rf"
 
 $UNAME/adb reboot
 
