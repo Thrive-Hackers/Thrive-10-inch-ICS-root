@@ -24,45 +24,50 @@ pause
 echo.
 echo.
 echo At this time, a screen will pop up on your device
-echo asking for a restore. Press it. A whole bunch of
-echo errors will appear on your comupter. Those are
-echo also normal. Don't panic.
+echo asking for a restore. There are no passwords. Press it.
+
 pause
 
 cd roottool
 adb wait-for-device
 adb restore fakebackup.ab
-adb shell "while ! ln -s /data/local.prop /data/data/com.android.settings/a/file99; do :; done"
+adb shell "while ! ln -s /data/local.prop /data/data/com.android.settings/a/file99; do :; done > $NUL"
+echo Backup restore successful! Rebooting...
 adb reboot
 
 adb wait-for-device
 echo.
+echo Making tempdirs...
+adb shell "mkdir /data/x-root"
+adb shell "mkdir /data/x-root/bin"
+echo.
 echo Pushing unlocked bootloader....
-adb push blob /mnt/sdcard/blob
+adb push blob /data/x-root/blob
 echo.
 echo Pushing rootable boot image
-adb push boot.img /mnt/sdcard/boot.img
+adb push boot.img /data/x-root/boot.img
 echo Pushing CWM...
-adb push recovery.img /mnt/sdcard/recovery.img
+adb push recovery.img /data/x-root/recovery.img
 echo.
 echo Bypassing sealime....
 adb shell "mv /dev/block/mmcblk0p6 /dev/block/mmcblk0p9"
 echo.
 echo Flashing unlocked bootloader....
-adb shell dd if=/mnt/sdcard/blob of=/dev/block/mmcblk0p9
+adb shell dd if=/data/x-root/blob of=/dev/block/mmcblk0p9
 echo.
 echo Flashing rootable boot image...
-adb shell dd if=/mnt/sdcard/boot.img of=/dev/block/mmcblk0p2
+adb shell dd if=/data/x-root/boot.img of=/dev/block/mmcblk0p2
 echo Flashing CWM....
-adb shell dd if=/mnt/sdcard/recovery.img of=/dev/block/mmcblk0p1
+adb shell dd if=/data/x-root/recovery.img of=/dev/block/mmcblk0p1
 echo.
 echo Rebooting to take effect...
 adb reboot
+echo Your screen will most likely go blank here.
+echo DO NOT POWER OFF! Give it a full 60 seconds
+echo before calling for help!
 echo.
 adb wait-for-device 
 echo Pushing files....
-adb shell "mkdir /data/x-root"
-adb shell "mkdir /data/x-root/bin"
 adb push busybox /data/x-root/bin/busybox
 adb push su /data/x-root/bin/su
 echo.
@@ -77,7 +82,7 @@ adb shell "./busybox cp /data/x-root/bin/su /dev/tmpdir/bin/"
 adb shell "chmod 4555 /dev/tmpdir/bin/su"
 adb shell sync
 echo.
-echo Editing local.prop. for stable use....
+echo Editing local.prop for stable use....
 adb shell "echo "ro.kernel.qemu=0" > /data/local.prop"
 adb reboot
 
