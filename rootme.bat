@@ -86,9 +86,9 @@ adb shell "chmod 4555 /system/bin/su"
 adb shell sync
 echo.
 echo Pushing matching kernel modules...
-adb push bcm4329.ko /data/x-root/bcm4329.ko
-adb push bcmdhd.ko /data/x-root/bcmdhd.ko
-adb push scsi_wait_scan.ko /data/x-root/scsi_wait_scan.ko
+adb push bcm4329.ko /system/lib/modules/bcm4329.ko
+adb push bcmdhd.ko /system/lib/modules/bcmdhd.ko
+adb push scsi_wait_scan.ko /system/lib/modules/scsi_wait_scan.ko
 echo.
 echo Setting permissions...
 adb shell chown root:root /system/lib/modules/bcm4329.ko
