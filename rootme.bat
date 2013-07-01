@@ -78,7 +78,7 @@ echo Mounting /System
 adb remount
 echo.
 echo Pushing su binary into system....
-adb shell "data/x-root/bin/busybox cp /data/x-root/bin/su /system/xbin/"
+adb shell "data/x-root/bin/busybox cp /data/x-root/bin/su /system/bin/"
 adb shell "data/x-root/bin/busybox cp /data/x-root/bin/busybox /system/xbin/"
 
 adb shell "chmod 4555 /system/bin/su"
