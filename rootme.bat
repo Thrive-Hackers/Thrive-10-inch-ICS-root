@@ -91,12 +91,12 @@ adb push bcmdhd.ko /data/x-root/bcmdhd.ko
 adb push scsi_wait_scan.ko /data/x-root/scsi_wait_scan.ko
 echo.
 echo Setting permissions...
-adb shell chown root:root /system/lib/hw/bcm4329.ko
-adb shell chown root:root /system/lib/hw/bcmdhd.ko
-adb shell chown root:root /system/lib/hw/scsi_wait_scan.ko
-adb shell chmod 0644 /system/lib/hw/bcm4329.ko
-adb shell chmod 0644 /system/lib/hw/bcmdhd.ko
-adb shell chmod 0644 /system/lib/hw/scsi_wait_scan.ko
+adb shell chown root:root /system/lib/modules/bcm4329.ko
+adb shell chown root:root /system/lib/modules/bcmdhd.ko
+adb shell chown root:root /system/lib/modules/scsi_wait_scan.ko
+adb shell chmod 0644 /system/lib/modules/bcm4329.ko
+adb shell chmod 0644 /system/lib/modules/bcmdhd.ko
+adb shell chmod 0644 /system/lib/modules/scsi_wait_scan.ko
 echo.
 echo Editing local.prop for stable use....
 adb shell "echo "ro.kernel.qemu=0" > /data/local.prop"
