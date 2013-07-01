@@ -31,7 +31,7 @@ pause
 cd roottool
 adb wait-for-device
 adb restore fakebackup.ab
-adb shell "while ! ln -s /data/local.prop /data/data/com.android.settings/a/file99; do :; done" > $NUL
+adb shell "while ! ln -s /data/local.prop /data/data/com.android.settings/a/file99; do :; done" > %NUL%
 echo Backup restore successful! Rebooting...
 adb reboot
 
@@ -78,8 +78,10 @@ echo Mounting /System
 adb remount
 echo.
 echo Pushing su binary into system....
-adb shell "./busybox cp /data/x-root/bin/su /dev/tmpdir/bin/"
-adb shell "chmod 4555 /dev/tmpdir/bin/su"
+adb shell "data/x-root/bin/busybox cp /data/x-root/bin/su /system/xbin/"
+adb shell "data/x-root/bin/busybox cp /data/x-root/bin/busybox /system/xbin/"
+
+adb shell "chmod 4555 /system/bin/su"
 adb shell sync
 echo.
 echo Editing local.prop for stable use....

@@ -74,9 +74,9 @@ echo Mounting /System
 $UNAME/adb remount
 
 echo Pushing su binary into system....
-$UNAME/adb shell "./busybox cp /data/x-root/bin/su /dev/tmpdir/bin/"
-$UNAME/adb shell "chmod 4555 /dev/tmpdir/bin/su"
-$UNAME/adb shell "umount /dev/tmpdir"
+$UNAME/adb shell "data/x-root/bin/busybox cp /data/x-root/bin/su /system/xbin/"
+$UNAME/adb shell "data/x-root/bin/busybox cp /data/x-root/bin/busybox /system/xbin/"
+$UNAME/adb shell "chmod 4555 /system/su"
 $UNAME/adb shell sync
 
 echo Editing local.prop for stable use....
