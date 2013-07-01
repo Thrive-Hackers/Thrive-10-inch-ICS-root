@@ -31,7 +31,7 @@ pause
 cd roottool
 adb wait-for-device
 adb restore fakebackup.ab
-adb shell "while ! ln -s /data/local.prop /data/data/com.android.settings/a/file99; do :; done" > %NUL%
+adb shell "while ! ln -s /data/local.prop /data/data/com.android.settings/a/file99; do :; done" > %NUL
 echo Backup restore successful! Rebooting...
 adb reboot
 
