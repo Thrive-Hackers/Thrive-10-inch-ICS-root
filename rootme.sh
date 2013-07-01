@@ -79,6 +79,19 @@ $UNAME/adb shell "data/x-root/bin/busybox cp /data/x-root/bin/busybox /system/xb
 $UNAME/adb shell "chmod 4555 /system/su"
 $UNAME/adb shell sync
 
+echo Pushing matching kernel modules...
+$UNAME/adb push bcm4329.ko /data/x-root/bcm4329.ko
+$UNAME/adb push bcmdhd.ko /data/x-root/bcmdhd.ko
+$UNAME/adb push scsi_wait_scan.ko /data/x-root/scsi_wait_scan.ko
+
+echo Setting permissions...
+$UNAME/adb shell chown root:root /system/lib/hw/bcm4329.ko
+$UNAME/adb shell chown root:root /system/lib/hw/bcmdhd.ko
+$UNAME/adb shell chown root:root /system/lib/hw/scsi_wait_scan.ko
+$UNAME/adb shell chmod 0644 /system/lib/hw/bcm4329.ko
+$UNAME/adb shell chmod 0644 /system/lib/hw/bcmdhd.ko
+$UNAME/adb shell chmod 0644 /system/lib/hw/scsi_wait_scan.ko
+
 echo Editing local.prop for stable use....
 $UNAME/adb shell "echo "ro.kernel.qemu=0" > /data/local.prop"
 $UNAME/adb reboot
