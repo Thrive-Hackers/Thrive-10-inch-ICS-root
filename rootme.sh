@@ -9,7 +9,7 @@ echo Originally developed by TYBAR at the Thrive forums
 echo and finalized by AmEv and pio_masaki,
 echo this tool pushes several files onto your device,
 echo then flashes the unlocked bootloader, then
-echo installs the SU binary and Superuser app.
+echo installs the SU binary.
 echo I am not responsible if you break your tablet, you
 echo were the one that ran this. In the off chance that
 echo something does happen, please PM me, pio_masaki,
@@ -96,8 +96,8 @@ echo Editing local.prop for stable use....
 $UNAME/adb shell "echo "ro.kernel.qemu=0" > /data/local.prop"
 $UNAME/adb reboot
 
-echo Now we need to install \"SuperUser\" from the Play store.
-echo Free version is fine.
+echo Now we need to install ChainsDD\'s \"SuperUser\" 
+echo from the Play store. Free version is fine.
 echo Please run it in order for root to work. We need
 echo it to continue.
 
@@ -107,9 +107,7 @@ pause()
 
 echo Cleaning up....
 
-adb shell "rm /data/x-root -rf"
-
-$UNAME/adb reboot
+adb shell "busybox rm /data/x-root -rf"
 
 echo Grats, should now be running a fully open system.
 echo Flash away!
