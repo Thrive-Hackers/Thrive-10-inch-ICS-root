@@ -10,7 +10,7 @@ echo Thrive, or the ADB drivers are not installed on
 echo your computer.
 echo If it is simply that you have USB Debugging disabled
 echo (as it is on any stock device), then please go to 
-echo Settings -> Developer Options -> USB debugging enabled.
+echo Settings -\> Developer Options -\> USB debugging enabled.
 ./roottool/$UNAME/adb wait-for-device
 clear
 
