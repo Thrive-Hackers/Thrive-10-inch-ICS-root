@@ -4,6 +4,16 @@ function pause(){
    read -p "Press [Enter] to continue"
 }
 export UNAME=`uname`
+echo If you can read this, means that your Thrive
+echo isn't connected, you have USB Debugging disabled on your
+echo Thrive, or the ADB drivers are not installed on
+echo your computer.
+echo If it is simply that you have USB Debugging disabled
+echo (as it is on any stock device), then please go to 
+echo Settings -> Developer Options -> USB debugging enabled.
+./roottool/$UNAME/adb wait-for-device
+clear
+
 echo Welcome to the opportunity to free your Thrive!
 echo Originally developed by TYBAR at the Thrive forums
 echo and finalized by AmEv and pio_masaki,
@@ -21,6 +31,7 @@ echo a full stock Thrive. Also, either be plugged in,
 echo or have at least 30% battery.
 
 pause()
+clear
 
 echo At this time, a screen will  pop up on your device
 echo asking for a restore. There are no passwords. Press it. 
@@ -36,6 +47,7 @@ echo Backup restore successful! Rebooting...
 $UNAME/adb reboot
 
 $UNAME/adb wait-for-device
+clear
 echo Making tempdirs...
 $UNAME/adb shell "mkdir /data/x-root"
 $UNAME/adb shell "mkdir /data/x-root/bin"
@@ -61,6 +73,7 @@ echo Your screen will most likely go blank here.
 echo DO NOT POWER OFF! Give it a full 60 seconds
 echo before calling for help!
 $UNAME/adb wait-for-device
+clear
 
 echo Pushing files....
 $UNAME/adb wait-for-device 
@@ -95,6 +108,7 @@ $UNAME/adb shell chmod 0644 /system/lib/modules/scsi_wait_scan.ko
 echo Editing local.prop for stable use....
 $UNAME/adb shell "echo "ro.kernel.qemu=0" > /data/local.prop"
 $UNAME/adb reboot
+clear
 
 echo Now we need to install ChainsDD\'s \"SuperUser\" 
 echo from the Play store. Free version is fine.
@@ -104,6 +118,7 @@ echo it to continue.
 echo If it does not install, please let us know on the
 echo Thrive forums.
 pause()
+clear
 
 echo Cleaning up....
 
@@ -114,6 +129,7 @@ echo Flash away!
 echo Credit goes to pio_masaki, Walking_corpse, and AmEv for
 echo testing and building this script.
 pause
+cls
 
 
 

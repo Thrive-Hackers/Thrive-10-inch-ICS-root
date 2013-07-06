@@ -1,5 +1,16 @@
 @echo off
 
+echo If you can read this, means that your Thrive
+echo isn't connected, you have USB Debugging disabled on your
+echo Thrive, or the ADB drivers are not installed on
+echo your computer.
+echo If it is simply that you have USB Debugging disabled
+echo (as it is on any stock device), then please go to 
+echo Settings -> Developer Options -> USB debugging enabled.
+echo.
+roottool\adb wait-for-device
+cls
+
 echo Welcome to the opportunity to free your Thrive!
 echo.
 echo Originally developed by TYBAR at the Thrive forums
@@ -20,6 +31,7 @@ echo a full stock Thrive. Also, either be plugged in,
 echo or have at least 30% battery.
 
 pause
+cls
 
 echo.
 echo.
@@ -36,6 +48,7 @@ echo Backup restore successful! Rebooting...
 adb reboot
 
 adb wait-for-device
+cls
 echo.
 echo Making tempdirs...
 adb shell "mkdir /data/x-root"
@@ -68,6 +81,7 @@ echo DO NOT POWER OFF! Give it a full 60 seconds
 echo before calling for help!
 echo.
 adb wait-for-device 
+cls
 echo Pushing files....
 adb push busybox /data/x-root/bin/busybox
 adb push su /data/x-root/bin/su
@@ -101,6 +115,7 @@ echo.
 echo Editing local.prop for stable use....
 adb shell "echo "ro.kernel.qemu=0" > /data/local.prop"
 adb reboot
+cls
 
 echo Now we need to install ChainsDD's "SuperUser" 
 echo from the Play store. Free version is fine.
@@ -110,6 +125,7 @@ echo.
 echo If it does not install, please let us know on the
 echo Thrive forums.
 pause
+cls
 echo.
 echo Cleaning up....
 echo.
@@ -120,6 +136,7 @@ echo Flash away!
 echo Credit goes to pio_masaki, Walking_corpse, and AmEv for
 echo testing and building this script.
 pause
+cls
 
 
 
