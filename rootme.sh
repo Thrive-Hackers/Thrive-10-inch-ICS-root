@@ -6,6 +6,7 @@ function pause(){
 
 export UNAME=`uname`
 cd roottool/$UNAME
+chmod +x ./adb
 echo If you can read this, it means that your Thrive
 echo isn't connected, you have USB Debugging disabled on your
 echo Thrive, or the ADB drivers are not installed on
